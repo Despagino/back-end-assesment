@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Back End Assessment</title>
+    <link rel="stylesheet" href="styles.css">
+  </head>
+  <body class="container">
+    <button id="complimentButton">Get a compliment</button>
+    <button id="fortuneButton">Get a fortune</button>
+
+    <div class="form">
+      <h3>If you could go back in time, what would your advice be to your younger self?</h3>
+      <form action="" id="formSubmit">
+        What is your name? 
+        <br>
+        <br>
+        <input type="text" placeholder="name" id="firstname"> 
+      <input type="text" placeholder="advice" id="advice">
+      <h3>Choose only 1</h3>
+      <select name="choice" id="choices">
+        <option value="money">1 billion dollars but never content</option>
+        <option value="fame">Fame but lonely</option>
+        <option value="travel">Visit every country in the world but you can never go back</option>
+      </select>
+      <br>
+      <br>
+      <input type="submit">
+    </form>
+    </div>
+    <div id="result">
+    </div>
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+    <script src="app.js"></script>
+  </body>
+</html>
