@@ -6,7 +6,6 @@ document.getElementById("complimentButton").addEventListener("click", () => {
     })
   })
 
-
 document.getElementById("fortuneButton").addEventListener("click", () => {
     axios.get("http://localhost:4000/api/fortune/")
     .then(res => {
@@ -16,29 +15,37 @@ document.getElementById("fortuneButton").addEventListener("click", () => {
 })
 
 let form = document.querySelector("#formSubmit")
+let deleteButton = document.querySelector("#deleteButton")
 
-getSelectValue = () => {
-    let select = document.querySelector("choices").value
-    return select
-}
 
 let createInfo = body => {
     axios.post("http://localhost:4000/api/advice/", body)
-    .then(displayInfo(body))
-}
-let deleteAdvice = id => {
-    axios.delete(`${"http://localhost:4000/api/advice/"}/${id}`)
-    .then(displayInfo(body))
-}
+    .then(res => {
+        let section = document.createElement("section")        
+        section.innerHTML = `
+         <h3>My name is ${body.name} and my advice is ${body.advice}</h3 
+        `
+        result.appendChild(section)
+        console.log(res.data)
+    }
+    )}
 
+let deleteAdvice = () => {
+        axios.delete(`http://localhost:4000/api/delete`)
+        .then(res => {
+            console.log(res.data)
+            result.innerHTML = ''
+        })
+    }
+
+    deleteButton.addEventListener("click", deleteAdvice)
+    
 submitHandler = (e) => {
     e.preventDefault()
 
     let name = document.querySelector("#firstname")
     let advice = document.querySelector("#advice")
     
-    
-
     let bodyObj = {
         name: name.value,
         advice: advice.value,
@@ -52,30 +59,6 @@ submitHandler = (e) => {
 }
 
 let result = document.getElementById("result")
-
-
-displayInfo = (body) => {
-
-    let name = document.createElement("h3")
-    let space = document.createElement("h3")
-    let section = document.createElement("section")
-    let deleteButton = document.querySelector("button")
-    
-    section.innerHTML = `
-    <h3>My name is ${body.name} and my advice is ${body.advice}</h3
-    <div>
-    <button id="deleteButton" onclick="deleteAdvice" (${body.id}"> delete </button>
-    </div>
-    `
-    // let input = `My name is ${body.name} and my advice is ${body.advice}`
-    
-    result.appendChild(section)
-
-    deleteButton.addEventListener("click", deleteAdvice)
-}
-
-
-
 form.addEventListener("submit", submitHandler)
 
     

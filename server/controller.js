@@ -2,7 +2,7 @@ const compliments = require('./compliments.json')
 const fortunes = require('./fortunes.json')
 const advices = require('./advice.json')
 
-let globalId = 2
+let globalId = 1
 
 module.exports = {
     getCompliment: (req, res) => {
@@ -15,12 +15,15 @@ module.exports = {
         let randomFortune = fortunes[randomIndex].fortune;
         res.status(200).send(randomFortune);
     },
+    getAdvice: (req, res) => {
+        res.status(200).send(advices);
+    },
     createAdvice: (req, res) => {
         let {name, advice} = req.body
         let newAdvice = {
             name,
             advice,
-            id: globalId,
+            id: globalId
         }
         advices.push(newAdvice)
         res.status(200).send(advices)
@@ -28,11 +31,10 @@ module.exports = {
         console.log(advices)
     },
     deleteAdvice: (req, res) => {
-        let index = advices.findIndex(advice => {
-            advice.id == +req.params.id
-        })
-        console.log(req.params)
-        advices.splice(index, 1)
+
+        console.log(advices)
+        advices.length = 0
         res.status(200).send(advices)
+        
     }
 }
